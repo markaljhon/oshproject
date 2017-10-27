@@ -35,6 +35,11 @@ app.post('/webhook', (req, res) => {
 
 });
 
+// Server index page
+app.get('/', (req, res) => {
+    res.send("Deployed!");
+})
+
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
