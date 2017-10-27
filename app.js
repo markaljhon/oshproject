@@ -4,7 +4,6 @@
 const
     express = require('express'),
     bodyParser = require('body-parser'),
-    request = require('request'),
     app = express().use(bodyParser.json()), // creates express http server
     messageHandler = require('./js/MessageHandler.js'),
     postBackHandler = require('./js/PostBackHandler.js');

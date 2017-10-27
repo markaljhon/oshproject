@@ -1,3 +1,5 @@
+request = require('request');
+
 // Sends response messages via the Send API
 const requestHandler = (sender_psid, response) => {
     let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
