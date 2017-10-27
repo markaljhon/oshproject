@@ -1,5 +1,5 @@
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+function handleRequest(sender_psid, response) {
     let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
     // Construct the message body

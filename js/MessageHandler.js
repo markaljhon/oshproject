@@ -1,5 +1,6 @@
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
+    const requestHandler = require('./js/RequestHandler.js');
     let response;
 
     // Checks if the message contains text
@@ -39,6 +40,6 @@ function handleMessage(sender_psid, received_message) {
         }
     }
 
-  // Send the response message
-  callSendAPI(sender_psid, response);
+    // Send the response message
+    requestHandler.handleRequest(sender_psid, response);
 }
