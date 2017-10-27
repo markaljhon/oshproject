@@ -1,5 +1,5 @@
 // Handles messages events
-let handleMessage = (sender_psid, received_message) => {
+function handleMessage(sender_psid, received_message) {
     let response;
 
     // Checks if the message contains text
