@@ -106,6 +106,8 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
+    let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
     // Construct the message body
     let message = {
         "recipient": {
