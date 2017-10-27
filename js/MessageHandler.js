@@ -1,6 +1,6 @@
 // Handles messages events
 const  messageHandler = (sender_psid, received_message) => {
-    const requestHandler = require('./js/RequestHandler.js');
+    const requestHandler = require('./RequestHandler.js');
     let response;
 
     // Checks if the message contains text

@@ -1,6 +1,6 @@
 // Handles messaging_postbacks events
 const postBackHandler = (sender_psid, received_postback) => {
-    const requestHandler = require('./js/RequestHandler.js');
+    const requestHandler = require('./RequestHandler.js');
     let response;
 
     // Get the payload for the postback
