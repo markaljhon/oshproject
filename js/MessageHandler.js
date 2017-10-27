@@ -24,12 +24,12 @@ function handleMessage(sender_psid, received_message) {
                         "buttons": [
                                 {
                                     "type": "postback",
-                                    "title": "Yes!",
+                                    "title": "Yes",
                                     "payload": "yes",
                                 },
                                 {
                                     "type": "postback",
-                                    "title": "No!",
+                                    "title": "No",
                                     "payload": "no",
                                 }
                         ],

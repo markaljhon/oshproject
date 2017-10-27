@@ -6,7 +6,10 @@ const
     bodyParser = require('body-parser'),
     request = require('request'),
     app = express().use(bodyParser.json()); // creates express http server
+
 require('./js/MessageHandler.js');
+require('./js/PostBackHandler.js');
+require('./js/SendRequest.js');
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -82,47 +85,3 @@ app.get('/webhook', (req, res) => {
         }
     }
 });
-
-// Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
-    let response;
-
-    // Get the payload for the postback
-    let payload = received_postback.payload;
-
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
-    }
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
-}
-
-// Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
-    let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": response
-    }
-
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-        }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
-}
