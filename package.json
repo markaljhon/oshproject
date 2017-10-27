@@ -8,5 +8,11 @@
     "start": "node app.js"
   },
   "author": "Mark Aljhon Ornupia <icmarkaljhon@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4",
+    "request": "^2.83.0"
+  }
 }
