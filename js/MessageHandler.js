@@ -1,5 +1,5 @@
 // Handles messages events
-const  handleMessage = (sender_psid, received_message) => {
+const  messageHandler = (sender_psid, received_message) => {
     const requestHandler = require('./js/RequestHandler.js');
     let response;
 
@@ -41,7 +41,7 @@ const  handleMessage = (sender_psid, received_message) => {
     }
 
     // Send the response message
-    requestHandler.handleRequest(sender_psid, response);
+    requestHandler(sender_psid, response);
 }
 
-module.exports = handleMessage;
+module.exports = messageHandler;
