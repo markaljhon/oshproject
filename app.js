@@ -109,7 +109,7 @@ function callSendAPI(sender_psid, response) {
     let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
     // Construct the message body
-    let message = {
+    let request_body = {
         "recipient": {
             "id": sender_psid
         },
