@@ -33,7 +33,7 @@ const  messageHandler = (sender_psid, received_message) => {
         }
 
         // Log message text
-        console.log('APP:: Message Received: "${received_message.text}"';
+        console.log('APP:: Message Received: "${received_message.text}"');
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -62,6 +62,9 @@ const  messageHandler = (sender_psid, received_message) => {
                 }
             }
         }
+
+        // Log message text
+        console.log('APP:: Attachment Received: "${attachment_url}"');
     }
 
     // Send the response message
