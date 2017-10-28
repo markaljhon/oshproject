@@ -19,9 +19,9 @@ const requestHandler = (sender_psid, response) => {
         "json": request_body
         }, (err, res, body) => {
         if (!err) {
-            console.log('APP:: Message Sent: "${response.text}"');
+            console.log(`APP:: Message Sent: "${response.text}"`);
         } else {
-            console.error("APP:: Error: Message not sent. (${err})");
+            console.error(`APP:: Error: Message not sent. (${err})`);
         }
     });
 }

@@ -4,7 +4,7 @@ const  messageHandler = (sender_psid, received_message) => {
     let response;
 
     // Log PSID
-    console.log('APP:: Sender PSID: ${sender_psid}');
+    console.log(`APP:: Sender PSID: ${sender_psid}`);
 
     // Checks if the message contains text
     if (received_message.text) {
@@ -33,7 +33,7 @@ const  messageHandler = (sender_psid, received_message) => {
         }
 
         // Log message text
-        console.log('APP:: Message Received: "${received_message.text}"');
+        console.log(`APP:: Message Received: "${received_message.text}"`);
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -64,7 +64,7 @@ const  messageHandler = (sender_psid, received_message) => {
         }
 
         // Log message text
-        console.log('APP:: Attachment Received: "${attachment_url}"');
+        console.log(`APP:: Attachment Received: "${attachment_url}"`);
     }
 
     // Send the response message
