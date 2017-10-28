@@ -12,6 +12,17 @@ const postBackHandler = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     }
+
+    switch (payload) {
+        case 'yes':
+            response = { "text": "Thanks!" }
+            break;
+        case 'no':
+            response = { "text": "Feed me some lyrics. I'm hungry. :)" }
+            break;
+        default:
+            response = { "text": "Sorry, I can't handle that." }
+    }
     // Send the message to acknowledge the postback
     requestHandler(sender_psid, response);
 }
