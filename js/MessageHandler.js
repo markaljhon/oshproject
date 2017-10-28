@@ -16,7 +16,7 @@ const  messageHandler = (sender_psid, received_message) => {
                 "payload": {
                     "template_type":"button",
                     "text":"Is that the Song Lyrics?",
-                    "buttons":[{
+                    "buttons":[
                         {
                             "type": "postback",
                             "title": "Yes",
@@ -27,7 +27,7 @@ const  messageHandler = (sender_psid, received_message) => {
                             "title": "No",
                             "payload": "no",
                         }
-                    }]
+                    ]
                 }
             }
         }
