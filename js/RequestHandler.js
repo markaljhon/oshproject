@@ -1,7 +1,6 @@
-request = require('request');
-
 // Sends response messages via the Send API
 const requestHandler = (sender_psid, response) => {
+    const request = require('request');
     let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
     // Construct the message body
@@ -20,9 +19,9 @@ const requestHandler = (sender_psid, response) => {
         "json": request_body
         }, (err, res, body) => {
         if (!err) {
-            console.log('message sent!')
+            console.log('APP:: Message Sent: "${response.text}"');
         } else {
-            console.error("Unable to send message:" + err);
+            console.error("APP:: Error: Message not sent. (${err})");
         }
     });
 }

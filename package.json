@@ -1,18 +1,18 @@
 {
-  "name": "oshproject",
-  "version": "1.0.0",
-  "description": "OSH Bot Server.",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "author": "Mark Aljhon Ornupia <icmarkaljhon@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "mongoose": "^4.12.4",
-    "request": "^2.83.0"
-  }
+    "name": "oshproject",
+    "version": "1.0.0",
+    "description": "OSH Bot Server.",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "author": "Mark Aljhon Ornupia <icmarkaljhon@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "^4.16.2",
+        "mongoose": "^4.12.4",
+        "request": "^2.83.0"
+    }
 }
