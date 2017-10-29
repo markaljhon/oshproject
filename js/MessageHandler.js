@@ -1,7 +1,7 @@
 // Handles messages events
 const  messageHandler = (senderPSID, receivedMessage) => {
     const requestHandler = require('./RequestHandler.js');
-    const trackSearch = require('./ApiMusicHandler.js');
+    const trackSearch = require('./ApiMusixHandler.js');
     let response;
 
     // Log PSID
