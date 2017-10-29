@@ -26,4 +26,16 @@ const trackSearch = (strLyrics) => {
     });
 }
 
+// Send all results to user.
+const sendResult = (jsonMusix) => {
+    let strResponse = "";
+    let response;
+
+    jsonMusix.message.body.track_list.forEach((track, index) =>{
+        strResponse += `${index}. ${track.track_name}.\n`;
+    });
+
+    response = { "text": strResponse }
+}
+
 module.exports = trackSearch;
