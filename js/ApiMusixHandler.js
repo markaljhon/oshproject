@@ -37,6 +37,8 @@ const sendResult = (senderPSID, jsonMusix) => {
         strResponse += `${index}. ${track.track_name}.\n`;
     });
 
+    console.log(`APP:: Musixmatch: Response: ${strResponse}`)
+
     response = { "text": strResponse }
     requestHandler(senderPSID, response);
 }
