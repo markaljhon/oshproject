@@ -2,6 +2,7 @@
 
 // Import dependencies.
 const request = require('request');
+const requestHandler = require('./RequestHandler.js');
 
 //Search music track. (track.search)
 const trackSearch = (senderPSID, strLyrics) => {
