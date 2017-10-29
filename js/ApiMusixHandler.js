@@ -8,12 +8,20 @@ const trackSearch = (strLyrics) => {
     let API_KEY_MUSIXMATCH = process.env.API_KEY_MUSIXMATCH;
 
     request({
-        "uri": `https://api.musixmatch.com/ws/1.1/track.search?format=json&qlyrics=${strLyrics}&apikey${API_KEY_MUSIXMATCH}`
+        "uri": "https://api.musixmatch.com/ws/1.1/track.search",
+        "qs": {
+            "format": "json",
+            "qlyrics": strLyrics,
+            "apikey": API_KEY_MUSIXMATCH
+        },
+        "method": "GET",
+        "json": true
         }, (err, res, body) => {
         if (!err) {
-            console.log(`APP:: Request Sent: "${res}"`);
+            console.log(`APP:: Musixmatch: API Request Sent: "${res.statuscode}"`);
+            console.log(`APP:: Musixmatch: JSON Received: "${body}"`);
         } else {
-            console.error(`APP:: Error: Message not sent. (${err})`);
+            console.error(`APP:: Musixmatch: Error: API request not sent. (${err})`);
         }
     });
 }
