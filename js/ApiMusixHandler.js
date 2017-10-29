@@ -4,7 +4,7 @@
 const request = require('request');
 
 //Search music track. (track.search)
-const trackSearch = (strLyrics) => {
+const trackSearch = (senderPSID, strLyrics) => {
     let API_KEY_MUSIXMATCH = process.env.API_KEY_MUSIXMATCH;
 
     request({
@@ -20,6 +20,7 @@ const trackSearch = (strLyrics) => {
         if (!err) {
             console.log(`APP:: Musixmatch: API Request Sent: "${res.statusCode}"`);
             console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[0].track.track_name}"`);
+            sendResult(senderPSID, body);
         } else {
             console.error(`APP:: Musixmatch: Error: API request not sent. (${err})`);
         }
@@ -27,7 +28,7 @@ const trackSearch = (strLyrics) => {
 }
 
 // Send all results to user.
-const sendResult = (jsonMusix) => {
+const sendResult = (senderPSID, jsonMusix) => {
     let strResponse = "";
     let response;
 
@@ -36,6 +37,7 @@ const sendResult = (jsonMusix) => {
     });
 
     response = { "text": strResponse }
+    requestHandler(senderPSID, response);
 }
 
 module.exports = trackSearch;
