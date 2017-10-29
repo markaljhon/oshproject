@@ -15,8 +15,7 @@ const trackSearch = (senderPSID, strLyrics) => {
             "qlyrics": strLyrics,
             "apikey": API_KEY_MUSIXMATCH
         },
-        "method": "GET",
-        "json": true
+        "method": "GET"
         }, (err, res, body) => {
         if (!err) {
             console.log(`APP:: Musixmatch: API Request Sent: "Status Code ${res.statusCode}"`);
