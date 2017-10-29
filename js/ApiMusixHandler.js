@@ -19,7 +19,7 @@ const trackSearch = (senderPSID, strLyrics) => {
         "json": true
         }, (err, res, body) => {
         if (!err) {
-            console.log(`APP:: Musixmatch: API Request Sent: "${res.statusCode}"`);
+            console.log(`APP:: Musixmatch: API Request Sent: "Status Code ${res.statusCode}"`);
             console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[0].track.track_name}"`);
             sendResult(senderPSID, body);
         } else {
