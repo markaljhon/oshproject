@@ -33,9 +33,9 @@ const sendResult = (senderPSID, jsonMusix) => {
     let strResponse = "";
     let response;
 
-    jsonMusix.message.body.track_list.forEach((track, index) =>{
-        strResponse += `${index}. ${track.track_name}.\n`;
-    });
+    // jsonMusix.message.body.track_list.forEach((track, index) =>{
+    //     strResponse += `${index}. ${track.track_name}.\n`;
+    // });
 
     for (var i = 0; i < jsonMusix.message.header.available; i++) {
         strResponse += `${i}. ${jsonMusix.message.body.track_list[i].track.track_name}}.\n`;
