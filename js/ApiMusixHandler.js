@@ -37,6 +37,10 @@ const sendResult = (senderPSID, jsonMusix) => {
         strResponse += `${index}. ${track.track_name}.\n`;
     });
 
+    for (var i = 0; i < jsonMusix.message.header.available; i++) {
+        strResponse += `${i}. ${jsonMusix.message.body.track_list[i].track.track_name}}.\n`;
+    }
+
     console.log(`APP:: Musixmatch: Response: ${strResponse}`)
 
     response = { "text": strResponse }
