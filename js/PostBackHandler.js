@@ -1,10 +1,10 @@
 // Handles messaging_postbacks events
-const postBackHandler = (sender_psid, received_postback) => {
+const postBackHandler = (senderPSID, receivedPostback) => {
     const requestHandler = require('./RequestHandler.js');
     let response;
 
     // Get the payload for the postback
-    let payload = received_postback.payload;
+    let payload = receivedPostback.payload;
 
     // Set the response based on the postback payload
     if (payload === 'yes') {
@@ -24,7 +24,7 @@ const postBackHandler = (sender_psid, received_postback) => {
             response = { "text": "Sorry, I can't handle that." }
     }
     // Send the message to acknowledge the postback
-    requestHandler(sender_psid, response);
+    requestHandler(senderPSID, response);
 }
 
 module.exports = postBackHandler;

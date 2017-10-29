@@ -1,12 +1,12 @@
 // Sends response messages via the Send API
-const requestHandler = (sender_psid, response) => {
+const requestHandler = (senderPSID, response) => {
     const request = require('request');
     let PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
     // Construct the message body
-    let request_body = {
+    let requestBody = {
         "recipient": {
-            "id": sender_psid
+            "id": senderPSID
         },
         "message": response
     }
@@ -16,7 +16,7 @@ const requestHandler = (sender_psid, response) => {
         "uri": "https://graph.facebook.com/v2.6/me/messages",
         "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
-        "json": request_body
+        "json": requestBody
         }, (err, res, body) => {
         if (!err) {
             console.log(`APP:: Message Sent: "${response.text}"`);

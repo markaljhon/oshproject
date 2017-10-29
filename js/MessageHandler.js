@@ -1,13 +1,15 @@
 // Handles messages events
-const  messageHandler = (sender_psid, received_message) => {
+const  messageHandler = (senderPSID, receivedMessage) => {
     const requestHandler = require('./RequestHandler.js');
+    const trackSearch = require('./ApiMusicHandler.js');
     let response;
 
     // Log PSID
-    console.log(`APP:: Sender PSID: ${sender_psid}`);
+    console.log(`APP:: Sender PSID: ${senderPSID}`);
 
     // Checks if the message contains text
-    if (received_message.text) {
+    if (receivedMessage.text) {
+        trackSearch(receivedMessage.text);
         // Create the payload for a basic text message, which
         // will be added to the body of our request to the Send API
         response = {
@@ -33,10 +35,10 @@ const  messageHandler = (sender_psid, received_message) => {
         }
 
         // Log message text
-        console.log(`APP:: Message Received: "${received_message.text}"`);
-    } else if (received_message.attachments) {
+        console.log(`APP:: Message Received: "${receivedMessage.text}"`);
+    } else if (receivedMessage.attachments) {
         // Get the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
+        let attachmentURL = receivedMessage.attachments[0].payload.url;
         response = {
             "attachment": {
                 "type": "template",
@@ -45,7 +47,7 @@ const  messageHandler = (sender_psid, received_message) => {
                     "elements": [{
                         "title": "Is this the attachment?",
                         "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
+                        "image_url": attachmentURL,
                         "buttons": [
                             {
                                 "type": "postback",
@@ -64,11 +66,11 @@ const  messageHandler = (sender_psid, received_message) => {
         }
 
         // Log message text
-        console.log(`APP:: Attachment Received: "${attachment_url}"`);
+        console.log(`APP:: Attachment Received: "${attachmentURL}"`);
     }
 
     // Send the response message
-    requestHandler(sender_psid, response);
+    requestHandler(senderPSID, response);
 }
 
 module.exports = messageHandler;
