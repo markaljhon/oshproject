@@ -25,10 +25,9 @@ const trackSearch = (senderPSID, strLyrics) => {
             let strResponse = "";
             let response;
 
-            body.message.body.track_list.forEach((track, index) =>{
-                strResponse += `${index}. ${track.track_name}.\n`;
-            });
-
+            for (var i = 0; i < body.message.header.available; i++) {
+                strResponse += `${i}. ${body.message.body.track_list[i].track.track_name}}.\n`;
+            }
             console.log(`APP:: Musixmatch: (${body.message.header.available}) Response: ${strResponse}`)
 
             response = { "text": strResponse }
