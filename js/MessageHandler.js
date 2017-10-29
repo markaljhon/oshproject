@@ -1,5 +1,6 @@
 // Handles messages events
 const  messageHandler = (senderPSID, receivedMessage) => {
+    // Import dependencies.
     const requestHandler = require('./RequestHandler.js');
     const trackSearch = require('./ApiMusixHandler.js');
     let response;
