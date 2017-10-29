@@ -19,7 +19,7 @@ const requestHandler = (senderPSID, response) => {
         "json": requestBody
         }, (err, res, body) => {
         if (!err) {
-            console.log(`APP:: Facebook: Message Sent: "${response}"`);
+            console.log(`APP:: Facebook: Message Sent: "${response.attachment.payload.text}"`);
         } else {
             console.error(`APP:: Facebook: Error: Message not sent. (${err})`);
         }
