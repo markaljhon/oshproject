@@ -22,7 +22,21 @@ const trackSearch = (senderPSID, strLyrics) => {
             console.log(`APP:: Musixmatch: API Request Sent: "Status Code ${res.statusCode}"`);
             console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[0].track.track_name}"`);
             console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[1].track.track_name}"`);
-            sendResult(senderPSID, body);
+            let strResponse = "";
+            let response;
+
+            body.message.body.track_list.forEach((track, index) =>{
+                strResponse += `${index}. ${track.track_name}.\n`;
+            });
+
+            // for (var i = 0; i < jsonMusix.message.header.available; i++) {
+            //     strResponse += `${i}. ${jsonMusix.message.body.track_list[i].track.track_name}}.\n`;
+            // }
+
+            console.log(`APP:: Musixmatch: (${body.message.header.available}) Response: ${strResponse}`)
+
+            response = { "text": strResponse }
+            requestHandler(senderPSID, response);
         } else {
             console.error(`APP:: Musixmatch: Error: API request not sent. (${err})`);
         }
