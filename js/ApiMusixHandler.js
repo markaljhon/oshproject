@@ -12,6 +12,7 @@ const trackSearch = (senderPSID, strLyrics) => {
         "uri": "https://api.musixmatch.com/ws/1.1/track.search",
         "qs": {
             "format": "json",
+            "qtrack": "Antukin",
             "qlyrics": strLyrics,
             "apikey": API_KEY_MUSIXMATCH
         },
@@ -21,7 +22,7 @@ const trackSearch = (senderPSID, strLyrics) => {
         if (!err) {
             console.log(`APP:: Musixmatch: API Request Sent: "Status Code ${res.statusCode}"`);
             console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[0].track.track_name}"`);
-            console.log(`APP:: Musixmatch: JSON Received: "${body.message.body.track_list[1].track.track_name}"`);
+            console.log(`APP:: Musixmatch: JSON Received: "LYRICS: ${strLyrics}"`);
             let strResponse = "";
             let response;
 
