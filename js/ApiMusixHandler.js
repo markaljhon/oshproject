@@ -5,7 +5,7 @@ const request = require('request');
 const requestHandler = require('./RequestHandler.js');
 
 //Search music track. (track.search)
-const trackSearch = (senderPSID, strQuery) => {
+const trackSearch = async (senderPSID, strQuery) => {
     let API_KEY_MUSIXMATCH = process.env.API_KEY_MUSIXMATCH;
 
     request(

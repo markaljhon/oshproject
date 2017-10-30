@@ -10,7 +10,7 @@ const  messageHandler = (senderPSID, receivedMessage) => {
 
     // Checks if the message contains text
     if (receivedMessage.text) {
-        async trackSearch(senderPSID, receivedMessage.text);
+        trackSearch(senderPSID, receivedMessage.text);
         // Create the payload for a basic text message, which
         // will be added to the body of our request to the Send API
         response = {
