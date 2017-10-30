@@ -20,15 +20,13 @@ const trackSearch = (senderPSID, strQuery) => {
         }, (err, res, body) => {
             if (!err) {
                 console.log(`APP:: Musixmatch: API Request Sent: "Status Code ${res.statusCode}"`);
-                console.log(`APP:: Musixmatch: Track Received:
-                    (${body.message.header.available} tracks)
-                    1st - "${body.message.body.track_list[0].track.track_name}"`);
+                console.log(`APP:: Musixmatch: Track Received: (${body.message.header.available} tracks) 1st - "${body.message.body.track_list[0].track.track_name}"`);
             } else {
                 console.error(`APP:: Musixmatch: Error: API request not sent. (${err})`);
             }
         }
     ).on('data', (data) => {
-        console.log(`APP:: Musixmatch: Data: ${data}`);
+        console.log(`APP:: Musixmatch: Data: ${data.message.body.track_list[0].track.track_name}`);
     });
 }
 
