@@ -2,7 +2,7 @@
 const  messageHandler = (senderPSID, receivedMessage) => {
     // Import dependencies.
     const requestHandler = require('./RequestHandler.js');
-    const trackSearch = require('./ApiMusixHandler.js');
+    const trackSearch = require('./Musixmatch.js');
     let response;
 
     // Log PSID

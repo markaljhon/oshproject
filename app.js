@@ -62,7 +62,7 @@ app.post('/webhook', (req, res) => {
             let senderPSID = webhook_event.sender.id;
 
             // Check if not our bot's message.
-            if(senderPSID != process.env.APP_PSID)
+            if(senderPSID !== process.env.APP_PSID)
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function.
             if (webhook_event.message) {
