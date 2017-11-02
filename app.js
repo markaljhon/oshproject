@@ -40,7 +40,7 @@ const responseHandler = (appDialogflow) => {
       break;
 
     default:
-      let speech = appDialogflow.body.result.fulfillment.speech;
+      let speech = appDialogflow.body.result.fulfillment[SPEECH_ARGUMENT];
       appDialogflow.tell('Speech: ' + speech);
       break;
   }
