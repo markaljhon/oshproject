@@ -1,8 +1,14 @@
 'use strict';
 
+// Imports Dialogflow dependencies and instantiate one.
 const DialogflowApp = require('actions-on-google').DialogflowApp;
+let request, response;
+const appDialogflow = new DialogflowApp({request: request, response: response});
 
-const app = new DialogflowApp({request: request, response: response});
+// Imports express dependencies and set up http server.
+const express = require('express');
+const bodyParser = require('body-parser');
+const appExpress = express().use(bodyParser.json()); // creates express http server.
 
 const LYRICS_INTENT = 'song.lyrics';
 const TITLE_INTENT = 'song.title';
@@ -12,26 +18,37 @@ const ARTIST_ARGUMENT = 'artist';
 const SPEECH_ARGUMENT = 'speech';
 
 // Define respone base on fired intent.
-const responseHandler = (app) => {
-  let intent = app.getIntent();
+const responseHandler = (appDialogflow) => {
+  let intent = appDialogflow.getIntent();
 
   switch (intent) {
     case LYRICS_INTENT:
-      let lyrics = app.getArgument(LYRICS_ARGUMENT);
-      app.tell('Lyrics: ' + lyrics);
+      let lyrics = appDialogflow.getArgument(LYRICS_ARGUMENT);
+      appDialogflow.tell('Lyrics: ' + lyrics);
       break;
 
     case TITLE_INTENT:
-      let title = app.getArgument(TITLE_ARGUMENT);
-      app.tell('Title: ' + title);
+      let title = appDialogflow.getArgument(TITLE_ARGUMENT);
+      appDialogflow.tell('Title: ' + title);
       break;
 
     default:
-      let speech = app.getArgument(SPEECH_ARGUMENT);
-      app.tell('Speech: ' + speech);
+      let speech = appDialogflow.getArgument(SPEECH_ARGUMENT);
+      appDialogflow.tell('Speech: ' + speech);
       break;
   }
 };
 
-// Assign response handler to Dialogflow app.
-app.handleRequest(responseHandler);
+// Assign response handler to Dialogflow appDialogflow.
+appDialogflow.handleRequest(responseHandler);
+
+// Sets server port and logs message on success.
+appExpress.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
+// Server index page
+appExpress.get('/', (req, res) => {
+  appDialogflow.handleRequest(responseHandler);
+
+  res.send('Deployed!');
+  console.log('Deployed!');
+});
