@@ -2,12 +2,17 @@
 
 // Imports Dialogflow dependencies and instantiate one.
 const DialogflowApp = require('actions-on-google').DialogflowApp;
-const appDialogflow = new DialogflowApp({request: request, response: response});
 
 // Imports express dependencies and set up http server.
 const express = require('express');
 const bodyParser = require('body-parser');
 const appExpress = express().use(bodyParser.json()); // creates express http server.
+
+// Sets server port and logs message on success.
+appExpress.listen(process.env.PORT || 1337, () => console.log('webhook is listening'))
+.on('error', (error) => {
+  console.error(error);
+});
 
 const LYRICS_INTENT = 'song.lyrics';
 const TITLE_INTENT = 'song.title';
@@ -39,15 +44,13 @@ const responseHandler = (appDialogflow) => {
 };
 
 // Assign response handler to Dialogflow appDialogflow.
-appDialogflow.handleRequest(responseHandler);
-
-// Sets server port and logs message on success.
-appExpress.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+// appDialogflow.handleRequest(responseHandler);
 
 // Server index page
-appExpress.get('/', (req, res) => {
+appExpress.get('/', (request, response) => {
+  const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(responseHandler);
 
-  res.send('Deployed!');
+  response.send('Deployed!');
   console.log('Deployed!');
 });
