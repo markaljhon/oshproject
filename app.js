@@ -36,12 +36,14 @@ const responseHandler = (appDialogflow, request) => {
 
     case LYRICS_INTENT:
       let title = parameters[TITLE_ARGUMENT];
-      appDialogflow.tell('Title: ' + title);
+      let artist = parameters[ARTIST_ARGUMENT];
+      appDialogflow.tell(`Title: ${title}
+        Artist: ${artist}`);
       break;
 
     default:
       let speech = request.body.result.fulfillment.speech;
-      appDialogflow.tell('Speech: ' + speech);
+      appDialogflow.tell(speech);
       break;
   }
 };
