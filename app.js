@@ -1,6 +1,6 @@
 'use strict';
 
-// Imports Dialogflow dependencies and instantiate one.
+// Imports Dialogflow dependencies.
 const DialogflowApp = require('actions-on-google').DialogflowApp;
 
 // Imports express dependencies and set up http server.
@@ -43,11 +43,9 @@ const responseHandler = (appDialogflow) => {
   }
 };
 
-// Assign response handler to Dialogflow appDialogflow.
-// appDialogflow.handleRequest(responseHandler);
-
-// Server index page
-appExpress.post('/', (request, response) => {
+// Creates the endpoint for our webhook.
+appExpress.post('/webhook', (request, response) => {
+  // Instantiate Dialogflow app and assign response handler.
   const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(responseHandler);
 
