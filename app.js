@@ -22,11 +22,11 @@ const ARTIST_ARGUMENT = 'artist';
 const SPEECH_ARGUMENT = 'speech';
 
 // Define respone base on fired intent.
-const responseHandler = (appDialogflow) => {
+const responseHandler = (appDialogflow, request) => {
   let intent = appDialogflow.getIntent();
 
   // Get parameters / arguments.
-  const parameters = appDialogflow.body.result.parameters;
+  const parameters = request.body.result.parameters;
 
   switch (intent) {
     case LYRICS_INTENT:
@@ -40,7 +40,7 @@ const responseHandler = (appDialogflow) => {
       break;
 
     default:
-      let speech = 'sp';
+      let speech = request.body.result.fulfillment.speech;
       appDialogflow.tell('Speech: ' + speech);
       break;
   }
@@ -50,7 +50,7 @@ const responseHandler = (appDialogflow) => {
 appExpress.post('/webhook', (request, response) => {
   // Instantiate Dialogflow app and assign response handler.
   const appDialogflow = new DialogflowApp({request: request, response: response});
-  appDialogflow.handleRequest(responseHandler);
+  appDialogflow.handleRequest(responseHandler(appDialogflow, request));
 
   console.log('Request body: ' + JSON.stringify(request.body));
   console.log(`Response: ${response}`);
