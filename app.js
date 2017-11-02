@@ -29,12 +29,12 @@ const responseHandler = (appDialogflow, request) => {
   const parameters = request.body.result.parameters;
 
   switch (intent) {
-    case LYRICS_INTENT:
+    case TITLE_INTENT:
       let lyrics = parameters[LYRICS_ARGUMENT];
       appDialogflow.tell('Lyrics: ' + lyrics);
       break;
 
-    case TITLE_INTENT:
+    case LYRICS_INTENT:
       let title = parameters[TITLE_ARGUMENT];
       appDialogflow.tell('Title: ' + title);
       break;
