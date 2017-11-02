@@ -50,4 +50,5 @@ appExpress.post('/webhook', (request, response) => {
   appDialogflow.handleRequest(responseHandler);
 
   console.log(`Request: ${request}`);
+  console.log(`ID: ${request.id}`);
 });
