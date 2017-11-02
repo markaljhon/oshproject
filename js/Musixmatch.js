@@ -11,7 +11,7 @@ const Musixmatch = (options) => {
       console.log(`Musixmatch: Track Received: (${body.message.header.available} tracks) 1st - "${body.message.body.track_list[0].track.track_name}"`);
 
       body.message.body.track_list.forEach((track, index) => {
-        result += `${index + 1}. ${track.track_name}.\n`;
+        result += `${index + 1}. ${body.message.body.track_list[index].track.track_name}.\n`;
       });
       console.log(`Musixmatch Result: ${result}`);
 
