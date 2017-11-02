@@ -25,19 +25,22 @@ const SPEECH_ARGUMENT = 'speech';
 const responseHandler = (appDialogflow) => {
   let intent = appDialogflow.getIntent();
 
+  // Get parameters / arguments.
+  const parameters = appDialogflow.body.result.parameters;
+
   switch (intent) {
     case LYRICS_INTENT:
-      let lyrics = appDialogflow.getArgument(LYRICS_ARGUMENT);
+      let lyrics = parameters[LYRICS_ARGUMENT];
       appDialogflow.tell('Lyrics: ' + lyrics);
       break;
 
     case TITLE_INTENT:
-      let title = appDialogflow.getArgument(TITLE_ARGUMENT);
+      let title = parameters[TITLE_ARGUMENT];
       appDialogflow.tell('Title: ' + title);
       break;
 
     default:
-      let speech = appDialogflow.getArgument(SPEECH_ARGUMENT);
+      let speech = appDialogflow.body.result.fulfillment.speech;
       appDialogflow.tell('Speech: ' + speech);
       break;
   }
