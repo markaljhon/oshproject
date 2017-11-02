@@ -8,6 +8,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const appExpress = express().use(bodyParser.json()); // creates express http server.
 
+// Imports intent handlers.
+const getTitle = require('./js/IntentHandler').getTitle;
+
 // Sets server port and logs message on success.
 appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listening'))
 .on('error', (error) => {
@@ -19,7 +22,6 @@ const TITLE_INTENT = 'song.title';
 const LYRICS_ARGUMENT = 'lyrics';
 const TITLE_ARGUMENT = 'title';
 const ARTIST_ARGUMENT = 'artist';
-const SPEECH_ARGUMENT = 'speech';
 
 // Define respone base on fired intent.
 const responseHandler = (appDialogflow, request) => {
@@ -27,18 +29,17 @@ const responseHandler = (appDialogflow, request) => {
 
   // Get parameters / arguments.
   const parameters = request.body.result.parameters;
+  let result;
 
   switch (intent) {
     case TITLE_INTENT:
-      let lyrics = parameters[LYRICS_ARGUMENT];
-      appDialogflow.tell('Lyrics: ' + lyrics);
+      result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]);
+      appDialogflow.tell('Result: \n' + result);
       break;
 
     case LYRICS_INTENT:
-      let title = parameters[TITLE_ARGUMENT];
-      let artist = parameters[ARTIST_ARGUMENT];
-      appDialogflow.tell(`Title: ${title}
-        Artist: ${artist}`);
+      result = getTitle(parameters[TITLE_ARGUMENT], parameters[ARTIST_ARGUMENT]);
+      appDialogflow.tell('Result: \n' + result);
       break;
 
     default:
