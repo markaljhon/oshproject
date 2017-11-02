@@ -2,7 +2,6 @@
 
 // Imports Dialogflow dependencies and instantiate one.
 const DialogflowApp = require('actions-on-google').DialogflowApp;
-let request, response;
 const appDialogflow = new DialogflowApp({request: request, response: response});
 
 // Imports express dependencies and set up http server.
