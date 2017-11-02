@@ -51,6 +51,6 @@ appExpress.post('/', (request, response) => {
   const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(responseHandler);
 
-  response.send('Deployed!');
+  // response.send('Deployed!');
   console.log('Deployed!');
 });
