@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const appExpress = express().use(bodyParser.json()); // creates express http server.
 
 // Sets server port and logs message on success.
-appExpress.listen(process.env.PORT || 3000, () => console.log('webhook is listening'))
+appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listening'))
 .on('error', (error) => {
   console.error(error);
 });
