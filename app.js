@@ -49,6 +49,6 @@ appExpress.post('/webhook', (request, response) => {
   const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(responseHandler);
 
-  console.log(`Request: ${request}`);
+  console.log(`Request: ${JSON.stringify(request)}`);
   console.log(`ID: ${request.id}`);
 });
