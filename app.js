@@ -33,8 +33,8 @@ const responseHandler = (appDialogflow, request) => {
 
   switch (intent) {
     case TITLE_INTENT:
-      result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]);
-      appDialogflow.tell('Result: \n' + result);
+      // result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]);
+      appDialogflow.tell('Result: \n' + getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]));
       break;
 
     case LYRICS_INTENT:
