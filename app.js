@@ -14,7 +14,7 @@ const getTitle = require('./js/IntentHandler').getTitle;
 // Sets server port and logs message on success.
 appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listening'))
 .on('error', (error) => {
-  console.error(error);
+  console.error('Webhook failed:' + error);
 });
 
 const LYRICS_INTENT = 'song.lyrics';
@@ -33,8 +33,14 @@ const responseHandler = (appDialogflow, request) => {
 
   switch (intent) {
     case TITLE_INTENT:
-      // result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]);
-      appDialogflow.tell('Result: \n' + getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]));
+      result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]).then(
+        result => {
+          appDialogflow.tell('Result: \n' + result);
+        },
+        result => {
+          appDialogflow.tell('Response empty: \n' + result);
+        }
+      );
       break;
 
     case LYRICS_INTENT:
