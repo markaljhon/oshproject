@@ -27,7 +27,7 @@ const getTitle = (parameters, callback) => {
     json: true
   };
 
-  return Musixmatch(options);
+  callback(Musixmatch(options));
 };
 
 const getLyrics = (parameters, callback) => {
@@ -46,7 +46,7 @@ const getLyrics = (parameters, callback) => {
     json: true
   };
 
-  return Musixmatch(options);
+  callback(Musixmatch(options));
 };
 
 module.exports = {getTitle, getLyrics};

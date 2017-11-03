@@ -33,7 +33,7 @@ const responseHandler = (appDialogflow, request) => {
     case TITLE_INTENT:
       getTitle(parameters,
         (result) => {
-          appDialogflow.tell('Title: \n' + result);
+          appDialogflow.tell('Result: \n' + result);
         }
       );
       break;
@@ -41,7 +41,7 @@ const responseHandler = (appDialogflow, request) => {
     case LYRICS_INTENT:
       getLyrics(parameters,
         (result) => {
-          appDialogflow.tell('Title: \n' + result);
+          appDialogflow.tell('Result: \n' + result);
         }
       );
       break;
@@ -59,6 +59,5 @@ appExpress.post('/webhook', (request, response) => {
   const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(responseHandler(appDialogflow, request));
 
-  console.log('Request body: ' + JSON.stringify(request.body));
-  console.log(`Response: ${response}`);
+  console.log('Request body: \n' + JSON.stringify(request.body));
 });
