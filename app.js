@@ -10,6 +10,7 @@ const appExpress = express().use(bodyParser.json()); // creates express http ser
 
 // Imports intent handlers.
 const getTitle = require('./js/IntentHandler').getTitle;
+const getLyrics = require('./js/IntentHandler').getLyrics;
 
 // Sets server port and logs message on success.
 appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listening'))
@@ -17,11 +18,9 @@ appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listen
   console.error('Webhook failed:' + error);
 });
 
+// Define constants. Intent names.
 const LYRICS_INTENT = 'song.lyrics';
 const TITLE_INTENT = 'song.title';
-const LYRICS_ARGUMENT = 'lyrics';
-const TITLE_ARGUMENT = 'title';
-const ARTIST_ARGUMENT = 'artist';
 
 // Define respone base on fired intent.
 const responseHandler = (appDialogflow, request) => {
@@ -29,23 +28,22 @@ const responseHandler = (appDialogflow, request) => {
 
   // Get parameters / arguments.
   const parameters = request.body.result.parameters;
-  let result;
 
   switch (intent) {
     case TITLE_INTENT:
-      getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]).then(
-        result => { // Success.
-          appDialogflow.tell('Result: \n' + result);
-        },
-        result => { // Failed.
-          appDialogflow.tell('Response empty: \n' + result);
+      getTitle(parameters,
+        (result) => {
+          appDialogflow.tell('Title: \n' + result);
         }
       );
       break;
 
     case LYRICS_INTENT:
-      result = getTitle(parameters[TITLE_ARGUMENT], parameters[ARTIST_ARGUMENT]);
-      appDialogflow.tell('Result: \n' + result);
+      getLyrics(parameters,
+        (result) => {
+          appDialogflow.tell('Title: \n' + result);
+        }
+      );
       break;
 
     default:

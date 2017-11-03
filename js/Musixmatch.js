@@ -20,8 +20,6 @@ const Musixmatch = (options) => {
       console.error(`Musixmatch: API request not sent. (Status ${response.statusCode}) (${error})`);
     }
   });
-
-  return result;
 };
 
 module.exports = Musixmatch;
