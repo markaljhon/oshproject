@@ -12,8 +12,8 @@ const TITLE_ARGUMENT = 'title';
 const ARTIST_ARGUMENT = 'artist';
 
 const getTitle = (parameters, callback) => {
-  let lyrics = parameters[LYRICS_ARGUMENT];
-  let artist = parameters[ARTIST_ARGUMENT];
+  let lyrics = parameters[LYRICS_ARGUMENT] || '';
+  let artist = parameters[ARTIST_ARGUMENT] || '';
 
   let options = {
     method: 'GET',
@@ -31,8 +31,8 @@ const getTitle = (parameters, callback) => {
 };
 
 const getLyrics = (parameters, callback) => {
-  let title = parameters[TITLE_ARGUMENT];
-  let artist = parameters[ARTIST_ARGUMENT];
+  let title = parameters[TITLE_ARGUMENT] || '';
+  let artist = parameters[ARTIST_ARGUMENT] || '';
 
   let options = {
     method: 'GET',
