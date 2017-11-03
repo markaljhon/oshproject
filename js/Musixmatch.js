@@ -14,9 +14,8 @@ const Musixmatch = (options) => {
         body.message.body.track_list.forEach((track, index) => {
           result += `${index + 1}. ${body.message.body.track_list[index].track.track_name}.\n`;
         });
-        console.log(`Musixmatch Result: ${result}`);
-
         resolve(result);
+        console.log(`Musixmatch Result: ${result}`);
       } else {
         console.error(`Musixmatch: API request not sent. (Status ${response.statusCode}) (${error})`);
       }
