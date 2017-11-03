@@ -33,7 +33,7 @@ const responseHandler = (appDialogflow, request) => {
     case TITLE_INTENT:
       getTitle(parameters,
         (result) => {
-          console.log('TITLE_INTENT served.');
+          console.log('TITLE_INTENT served.  ' + result);
           appDialogflow.tell('Result: \n' + result);
         }
       );
