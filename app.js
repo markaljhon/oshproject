@@ -33,11 +33,11 @@ const responseHandler = (appDialogflow, request) => {
 
   switch (intent) {
     case TITLE_INTENT:
-      result = getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]).then(
-        result => {
+      getTitle(parameters[LYRICS_ARGUMENT], parameters[ARTIST_ARGUMENT]).then(
+        result => { // Success.
           appDialogflow.tell('Result: \n' + result);
         },
-        result => {
+        result => { // Failed.
           appDialogflow.tell('Response empty: \n' + result);
         }
       );
