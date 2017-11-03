@@ -32,7 +32,6 @@ const responseHandler = (appDialogflow, request, response) => {
 
   switch (intent) {
     case TITLE_INTENT:
-      appDialogflow.tell('Result: \n Something');
       getTitle(parameters,
         (result) => {
           console.log('TITLE_INTENT served.  ' + result);
