@@ -28,7 +28,6 @@ const getTitle = (parameters, callback) => {
   };
 
   Musixmatch(options).then(result => {
-    console.log('Result: \n' + result);
     callback(result);
   });
 };
@@ -50,7 +49,6 @@ const getLyrics = (parameters, callback) => {
   };
 
   Musixmatch(options).then(result => {
-    console.log('Result: \n' + result);
     callback(result);
   });
 };
