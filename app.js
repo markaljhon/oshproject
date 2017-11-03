@@ -23,8 +23,9 @@ const LYRICS_INTENT = 'song.lyrics';
 const TITLE_INTENT = 'song.title';
 
 // Define respone base on fired intent.
-const responseHandler = (appDialogflow, request) => {
+const responseHandler = (appDialogflow, request, response) => {
   let intent = appDialogflow.getIntent();
+  let responseJson = {};
 
   // Get parameters / arguments.
   const parameters = request.body.result.parameters;
@@ -34,6 +35,8 @@ const responseHandler = (appDialogflow, request) => {
       getTitle(parameters,
         (result) => {
           console.log('TITLE_INTENT served.  ' + result);
+          responseJson.displayText = 'Result: ' + result;
+          response.json(responseJson);
           appDialogflow.tell('Result: \n' + result);
         }
       );
@@ -58,7 +61,7 @@ const responseHandler = (appDialogflow, request) => {
 appExpress.post('/webhook', (request, response) => {
   // Instantiate Dialogflow app and assign response handler.
   const appDialogflow = new DialogflowApp({request: request, response: response});
-  appDialogflow.handleRequest(responseHandler(appDialogflow, request));
+  appDialogflow.handleRequest(responseHandler(appDialogflow, request, response));
 
   console.log('Request body: \n' + JSON.stringify(request.body));
 });
