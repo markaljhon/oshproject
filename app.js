@@ -25,10 +25,9 @@ const TITLE_INTENT = 'song.title';
 // Define respone base on fired intent.
 const responseHandler = (appDialogflow, request, response) => {
   let intent = appDialogflow.getIntent();
-  let responseJson = {};
 
   // Get parameters / arguments.
-  const parameters = request.body.result.parameters;
+  const parameters = appDialogflow.options.request.body.result.parameters;
 
   switch (intent) {
     case TITLE_INTENT:
