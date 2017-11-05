@@ -8,9 +8,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const appExpress = express().use(bodyParser.json()); // creates express http server.
 
-// Imports intent handlers.
-const getTitle = require('./js/IntentHandler').getTitle;
-const getLyrics = require('./js/IntentHandler').getLyrics;
+// Imports intent handler.
+const intentHandler = require('./js/IntentHandler');
 
 // Sets server port and logs message on success.
 appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listening'))
@@ -18,46 +17,20 @@ appExpress.listen(process.env.PORT || 3002, () => console.log('webhook is listen
   console.error('Webhook failed:' + error);
 });
 
-// Define constants. Intent names.
+// Define constants for intent names.
 const LYRICS_INTENT = 'song.lyrics';
 const TITLE_INTENT = 'song.title';
 
-// Define respone base on fired intent.
-const responseHandler = (appDialogflow, request, response) => {
-  let intent = appDialogflow.getIntent();
-
-  // Get parameters / arguments.
-  const parameters = appDialogflow.options.request.body.result.parameters;
-
-  switch (intent) {
-    case TITLE_INTENT:
-      getTitle(parameters,
-        (result) => {
-          appDialogflow.tell('Result: \n' + result);
-        }
-      );
-      break;
-
-    case LYRICS_INTENT:
-      getLyrics(parameters,
-        (result) => {
-          appDialogflow.tell('Result: \n' + result);
-        }
-      );
-      break;
-
-    default:
-      let speech = request.body.result.fulfillment.speech;
-      appDialogflow.tell(speech);
-      break;
-  }
-};
+// Assign response based on fired intent.
+const actionMap = new Map();
+actionMap.set(LYRICS_INTENT, intentHandler.getLyrics);
+actionMap.set(TITLE_INTENT, intentHandler.getTitle);
 
 // Creates the endpoint for our webhook.
 appExpress.post('/webhook', (request, response) => {
   // Instantiate Dialogflow app and assign response handler.
   const appDialogflow = new DialogflowApp({request: request, response: response});
-  appDialogflow.handleRequest(responseHandler(appDialogflow, request, response));
+  appDialogflow.handleRequest(actionMap);
 
   console.log('Request body: \n' + JSON.stringify(request.body));
 });

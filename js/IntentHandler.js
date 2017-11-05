@@ -1,7 +1,7 @@
 // Handles intent actions.
 
 // Import dependencies.
-const Musixmatch = require('./Musixmatch.js');
+const Musixmatch = require('./Musixmatch');
 
 // Musixmatch API key.
 const API_KEY_MUSIXMATCH = process.env.API_KEY_MUSIXMATCH;
@@ -10,14 +10,15 @@ const API_KEY_MUSIXMATCH = process.env.API_KEY_MUSIXMATCH;
 const LYRICS_ARGUMENT = 'lyrics';
 const TITLE_ARGUMENT = 'title';
 const ARTIST_ARGUMENT = 'artist';
+const URI_MUSIXMATCH = 'https://api.musixmatch.com/ws/1.1/track.search';
 
-const getTitle = (parameters, callback) => {
-  let lyrics = parameters[LYRICS_ARGUMENT] || '';
-  let artist = parameters[ARTIST_ARGUMENT] || '';
+const getTitle = (app) => {
+  let lyrics = app.getArgument(LYRICS_ARGUMENT) || '';
+  let artist = app.getArgument(ARTIST_ARGUMENT) || '';
 
   let options = {
     method: 'GET',
-    uri: 'https://api.musixmatch.com/ws/1.1/track.search',
+    uri: URI_MUSIXMATCH,
     qs: {
       'format': 'json',
       'q_artist': artist,
@@ -28,17 +29,17 @@ const getTitle = (parameters, callback) => {
   };
 
   Musixmatch(options).then(result => {
-    callback(result);
+    app.tell('Result: \n' + result);
   });
 };
 
-const getLyrics = (parameters, callback) => {
-  let title = parameters[TITLE_ARGUMENT] || '';
-  let artist = parameters[ARTIST_ARGUMENT] || '';
+const getLyrics = (app) => {
+  let title = app.getArgument(TITLE_ARGUMENT) || '';
+  let artist = app.getArgument(ARTIST_ARGUMENT) || '';
 
   let options = {
     method: 'GET',
-    uri: 'https://api.musixmatch.com/ws/1.1/track.search',
+    uri: URI_MUSIXMATCH,
     qs: {
       'format': 'json',
       'q_track': title,
@@ -49,7 +50,7 @@ const getLyrics = (parameters, callback) => {
   };
 
   Musixmatch(options).then(result => {
-    callback(result);
+    app.tell('Result: \n' + result);
   });
 };
 
