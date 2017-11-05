@@ -14,9 +14,10 @@ const Musixmatch = (options) => {
         });
 
         resolve(body.message.body.track_list[0].track.track_name);
+        console.log(`Musixmatch Response: \n${body.message}`);
         console.log(`Musixmatch Result: \n${result}`);
       } else {
-        console.error(`Musixmatch: API request not sent. (Status ${response.statusCode}) (${error})`);
+        console.error(`Musixmatch: API request not sent. (Status ${response.statusCode || 0}) (${error})`);
       }
     }); // End of callback and request.
   }); // End of Promise.

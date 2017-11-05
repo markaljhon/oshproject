@@ -28,15 +28,16 @@ actionMap.set(TITLE_INTENT, intentHandler.getTitle);
 
 // Creates the endpoint for our webhook.
 appExpress.post('/webhook', (request, response) => {
-  // Instantiate Dialogflow app and assign response handler.
+  // Instantiate Dialogflow app.
   const appDialogflow = new DialogflowApp({request: request, response: response});
-  appDialogflow.handleRequest(actionMap);
 
   // Handle undefined intent. ie. Small Talks.
   // Return default response.
   if (!request.body.result.metadata.intentName) {
     console.log('Undefined intent: ' + request.body.result.fulfillment.speech);
     appDialogflow.tell(request.body.result.fulfillment.speech);
+  } else { // Assign response handler for valid intents.
+    appDialogflow.handleRequest(actionMap);
   }
 
   console.log('Request body: \n' + JSON.stringify(request.body));
