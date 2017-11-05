@@ -34,7 +34,10 @@ appExpress.post('/webhook', (request, response) => {
 
   // Handle undefined intent. ie. Small Talks.
   // Return default response.
-  appDialogflow.tell(request.body.result.fulfillment.speech);
+  if (!request.body.result.metadata.intentName) {
+    console.log('Undefined intent: ' + request.body.result.fulfillment.speech);
+    appDialogflow.tell(request.body.result.fulfillment.speech);
+  }
 
   console.log('Request body: \n' + JSON.stringify(request.body));
 });
