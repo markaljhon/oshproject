@@ -32,7 +32,7 @@ appExpress.post('/webhook', (request, response) => {
   const appDialogflow = new DialogflowApp({request: request, response: response});
   appDialogflow.handleRequest(actionMap);
 
-  console.log('INTENT: ' + appDialogflow.getIntent());
+  console.log('INTENT: ' + request.body.result.metadata.intentName);
 
   console.log('Request body: \n' + JSON.stringify(request.body));
 });
